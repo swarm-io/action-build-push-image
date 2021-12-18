@@ -23,9 +23,9 @@ jobs:
     steps:
       - uses: swarm-io/action-build-push-image@v1
         with:
-          credentials-json: '${{ secrets.GAR_WRITE_SERVICE_ACCOUNT_KEY }}'
-          project-id: '${{ secrets.GCLOUD_PROJECT_ID_PROD }}'
-          secrets: 'gitPat=${{ secrets.GIT_RUNNER_TOKEN }}'
+          credentials-json: ${{ secrets.GAR_WRITE_SERVICE_ACCOUNT_KEY }}
+          project-id: ${{ secrets.GCLOUD_PROJECT_ID_PROD }}
+          secrets: gitPat=${{ secrets.GIT_RUNNER_TOKEN }}
 ```
 <!-- end examples -->
 <!-- start [.github/ghdocs/examples/] -->
