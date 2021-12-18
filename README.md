@@ -13,20 +13,19 @@
 <!-- start examples -->
 ### Example usage
 ```yaml
-on: [push]
-
+name: Build and push image to GAR
+on:
+  release:
+    types: [created]
 jobs:
-  hello_world_job:
+  build-push-image:
     runs-on: ubuntu-latest
-    name: A job to say hello
     steps:
-      - uses: actions/checkout@v2
-      - id: foo
-        uses: actions/hello-world-composite-action@v1
+      - uses: swarm-io/action-build-push-image@v1
         with:
-          who-to-greet: 'Mona the Octocat'
-      - run: echo random-number ${{ steps.foo.outputs.random-number }}
-        shell: bash
+          credentials-json: ${{ secrets.GAR_WRITE_SERVICE_ACCOUNT_KEY }}
+          project-id: ${{ secrets.GCLOUD_PROJECT_ID_PROD }}
+          secrets: gitPat=${{ secrets.GIT_RUNNER_TOKEN }}
 ```
 <!-- end examples -->
 <!-- start [.github/ghdocs/examples/] -->
