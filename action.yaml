@@ -46,11 +46,13 @@ runs:
     - id: get-tags
       shell: bash
       run: |
-        for version in ${{ inputs.tag-versions }}
         fullTags=""
+        tagVersions=${{ inputs.tag-versions }}
+        for version in ${tagVersions//,/ }
         do
-          fullTags="$fullTags,${{ inputs.repository }}/${{ inputs.tag-name }}:$version"
+          fullTags="${{ inputs.repository }}/${{inputs.project-id}}/${{ inputs.tag-name }}:$version,$fullTags"
         done
+        fullTags=${fullTags::-1}
         echo "will push with tags: $fullTags"
         echo "::set-output name=tags::$fullTags"
     - id: build-image
@@ -70,4 +72,4 @@ runs:
       with:
         secrets: ${{ inputs.secrets }}
         cache-from: type=gha,mode=max
-        cache-to: type=registry,ref=${{ inputs.repository }}/${{ inputs.tag-name }}:${{ inputs.cache-tag-version }},mode=max
+        cache-to: type=registry,ref=${{ inputs.repository }}/${{inputs.project-id}}/${{ inputs.tag-name }}:${{ inputs.cache-tag-version }},mode=max
