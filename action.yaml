@@ -46,9 +46,12 @@ runs:
     - id: repo-urls
       shell: bash
       run: |
-        baseUrl=${{ inputs.region }}-docker.pkg.dev
+        baseUrl="${{ inputs.region }}-docker.pkg.dev"
+        fullUrl="$baseUrl/${{ inputs.project-id }}/${{ inputs.repository }}/${{ inputs.tag-name }}"
+        echo "baseUrl is: $baseUrl"
+        echo "fullUrl is: $fullUrl"
         echo "::set-output name=baseUrl::$baseUrl"
-        echo "::set-output name=fullUrl::$baseUrl/${{ inputs.project-id }}/${{ inputs.registry-name }}/${{ inputs.tag-name }}"
+        echo "::set-output name=fullUrl::$fullUrl"
     - shell: bash
       run: |
         gcloud auth configure-docker ${{ steps.repo-urls.outputs.baseUrl }}
