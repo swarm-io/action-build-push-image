@@ -65,7 +65,7 @@ Builds an image, pushes to artifact registry, and caches to gha as well as the `
 <!-- end outputs -->
 <!-- start examples -->
 
-### Example usage
+### Example usage with multiple secrets
 
 ```yaml
 name: Build and push image to GAR
@@ -80,7 +80,10 @@ jobs:
         with:
           credentials-json: ${{ secrets.GAR_WRITE_SERVICE_ACCOUNT_KEY }}
           project-id: ${{ secrets.GCLOUD_PROJECT_ID_PROD }}
-          secrets: gitPat=${{ secrets.GIT_RUNNER_TOKEN }}
+          secrets: |
+            GIT_PAT=${{ secrets.GIT_RUNNER_TOKEN }}
+            BUF_USER=${{ secrets.BUF_USER }}
+            BUF_TOKEN=${{ secrets.BUF_TOKEN }}
 ```
 
 <!-- end examples -->
