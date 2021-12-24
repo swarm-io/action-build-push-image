@@ -1,5 +1,5 @@
 name: Build and Push image
-description: 'Builds an image, pushes to artifact registry, and caches to gha as well as the `cache` tag. Specifically designed to work with artifact registry'
+description: 'Builds an image, pushes to artifact registry, and caches to gha as well as the `cache` tag. Specifically designed to work with artifact registry. To build without caching, include `no-cache` in the commit mesage.'
 inputs:
   credentials-json:
     description: 'gcloud service account credentials json'
@@ -16,7 +16,7 @@ inputs:
     required: false
     default: 'images'
   secrets:
-    description: 'docker build secrets, comma separated string key=value'
+    description: 'docker build secrets. key=value pairs separated by newlines. See [docker build push action secrets configuration](https://github.com/docker/build-push-action/blob/master/docs/advanced/secrets.md) for details'
     required: false
     default: ''
   tag-name:
