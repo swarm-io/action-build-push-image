@@ -5,7 +5,7 @@
 <!-- end title -->
 <!-- start description -->
 
-Builds an image, pushes to artifact registry, and caches to gha as well as the `cache` tag. Specifically designed to work with artifact registry
+Builds an image, pushes to artifact registry, and caches to gha as well as the `cache` tag. Specifically designed to work with artifact registry. To build without caching, include `no-cache` in the commit mesage.
 
 <!-- end description -->
 <!-- start contents -->
@@ -29,7 +29,8 @@ Builds an image, pushes to artifact registry, and caches to gha as well as the `
     # Default: images
     repository: ""
 
-    # docker build secrets, comma separated string key=value
+    # docker build secrets. key=value pairs separated by newlines. See [docker build
+    # push action secrets configuration](https://github.com/docker/build-push-action/blob/master/docs/advanced/secrets.md) for details
     # Default:
     secrets: ""
 
@@ -49,16 +50,16 @@ Builds an image, pushes to artifact registry, and caches to gha as well as the `
 <!-- end usage -->
 <!-- start inputs -->
 
-| **Input**               | **Description**                                                  |                  **Default**                  | **Required** |
-| :---------------------- | :--------------------------------------------------------------- | :-------------------------------------------: | :----------: |
-| **`credentials-json`**  | gcloud service account credentials json                          |                                               |   **true**   |
-| **`project-id`**        | gcloud project id                                                |                                               |   **true**   |
-| **`region`**            | artifact registry region                                         |                  `us-west1`                   |  **false**   |
-| **`repository`**        | artifact registry repository                                     |                   `images`                    |  **false**   |
-| **`secrets`**           | docker build secrets, comma separated string key=value           |                                               |  **false**   |
-| **`tag-name`**          | tag name, excluding tag version, such as `myapp`                 |     `${{ github.event.repository.name }}`     |  **false**   |
-| **`tag-versions`**      | git tags to push, comma separated string such as `latest,v1.0.0` | `latest,${{ github.event.release.tag_name }}` |  **false**   |
-| **`cache-tag-version`** | git tag version to use for the registry cache                    |                    `cache`                    |  **false**   |
+| **Input**               | **Description**                                                                                                                                                                                                 |                  **Default**                  | **Required** |
+| :---------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :-------------------------------------------: | :----------: |
+| **`credentials-json`**  | gcloud service account credentials json                                                                                                                                                                         |                                               |   **true**   |
+| **`project-id`**        | gcloud project id                                                                                                                                                                                               |                                               |   **true**   |
+| **`region`**            | artifact registry region                                                                                                                                                                                        |                  `us-west1`                   |  **false**   |
+| **`repository`**        | artifact registry repository                                                                                                                                                                                    |                   `images`                    |  **false**   |
+| **`secrets`**           | docker build secrets. key=value pairs separated by newlines. See [docker build push action secrets configuration](https://github.com/docker/build-push-action/blob/master/docs/advanced/secrets.md) for details |                                               |  **false**   |
+| **`tag-name`**          | tag name, excluding tag version, such as `myapp`                                                                                                                                                                |     `${{ github.event.repository.name }}`     |  **false**   |
+| **`tag-versions`**      | git tags to push, comma separated string such as `latest,v1.0.0`                                                                                                                                                | `latest,${{ github.event.release.tag_name }}` |  **false**   |
+| **`cache-tag-version`** | git tag version to use for the registry cache                                                                                                                                                                   |                    `cache`                    |  **false**   |
 
 <!-- end inputs -->
 <!-- start outputs -->
